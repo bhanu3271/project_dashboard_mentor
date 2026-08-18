@@ -23,7 +23,6 @@ async function loadData() {
         });
 
         if (!response.ok) {
-
             throw new Error(
                 "Unable to connect to Google Apps Script."
             );
@@ -32,7 +31,6 @@ async function loadData() {
         const result = await response.json();
 
         if (!result.success) {
-
             throw new Error(
                 result.error || "API error"
             );
@@ -74,18 +72,14 @@ async function loadData() {
 function populateProgramFilter() {
 
     const select =
-        document.getElementById(
-            "programFilter"
-        );
+        document.getElementById("programFilter");
 
     if (!select) return;
 
-    const currentValue =
-        select.value;
+    const currentValue = select.value;
 
     const programs = [
         ...new Set(
-
             allData
                 .map(row =>
                     String(
@@ -93,7 +87,6 @@ function populateProgramFilter() {
                     ).trim()
                 )
                 .filter(Boolean)
-
         )
     ].sort();
 
@@ -112,14 +105,8 @@ function populateProgramFilter() {
 
     });
 
-    if (
-        programs.includes(
-            currentValue
-        )
-    ) {
-
-        select.value =
-            currentValue;
+    if (programs.includes(currentValue)) {
+        select.value = currentValue;
     }
 }
 
@@ -131,18 +118,14 @@ function populateProgramFilter() {
 function populateBatchFilter() {
 
     const select =
-        document.getElementById(
-            "batchFilter"
-        );
+        document.getElementById("batchFilter");
 
     if (!select) return;
 
-    const currentValue =
-        select.value;
+    const currentValue = select.value;
 
     const batches = [
         ...new Set(
-
             allData
                 .map(row =>
                     String(
@@ -150,11 +133,11 @@ function populateBatchFilter() {
                     ).trim()
                 )
                 .filter(Boolean)
-
         )
     ];
 
-    // Natural sorting for Batch 1, Batch 2, Batch 10 etc.
+    // Natural sorting:
+    // Batch 1, Batch 2, Batch 3, Batch 10...
     batches.sort((a, b) => {
 
         const numberA =
@@ -195,14 +178,8 @@ function populateBatchFilter() {
 
     });
 
-    if (
-        batches.includes(
-            currentValue
-        )
-    ) {
-
-        select.value =
-            currentValue;
+    if (batches.includes(currentValue)) {
+        select.value = currentValue;
     }
 }
 
@@ -220,12 +197,10 @@ function populateCurrentTermFilter() {
 
     if (!select) return;
 
-    const currentValue =
-        select.value;
+    const currentValue = select.value;
 
     const values = [
         ...new Set(
-
             allData
                 .map(row =>
                     normalizeCurrentTerm(
@@ -233,7 +208,6 @@ function populateCurrentTermFilter() {
                     )
                 )
                 .filter(Boolean)
-
         )
     ];
 
@@ -252,14 +226,8 @@ function populateCurrentTermFilter() {
 
     });
 
-    if (
-        values.includes(
-            currentValue
-        )
-    ) {
-
-        select.value =
-            currentValue;
+    if (values.includes(currentValue)) {
+        select.value = currentValue;
     }
 }
 
@@ -271,11 +239,9 @@ function populateCurrentTermFilter() {
 function normalizeCurrentTerm(value) {
 
     const text =
-        String(
-            value ?? ""
-        )
-        .trim()
-        .toLowerCase();
+        String(value ?? "")
+            .trim()
+            .toLowerCase();
 
     if (
         text === "true" ||
@@ -295,9 +261,7 @@ function normalizeCurrentTerm(value) {
         return "False";
     }
 
-    return String(
-        value ?? ""
-    ).trim();
+    return String(value ?? "").trim();
 }
 
 
@@ -369,9 +333,9 @@ function applyFilters() {
         allData.filter(row => {
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // PROGRAM
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const rowProgram =
                 String(
@@ -384,9 +348,9 @@ function applyFilters() {
                 rowProgram === program;
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // TRACK
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const rowTrack =
                 String(
@@ -399,9 +363,9 @@ function applyFilters() {
                 rowTrack === track;
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // BATCH
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const rowBatch =
                 String(
@@ -414,9 +378,9 @@ function applyFilters() {
                 rowBatch === batch;
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // CURRENT TERM
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const rowCurrentTerm =
                 normalizeCurrentTerm(
@@ -429,9 +393,9 @@ function applyFilters() {
                 rowCurrentTerm === currentTerm;
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // ROLL NUMBER
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const rollNo =
                 String(
@@ -440,25 +404,28 @@ function applyFilters() {
                     row["Roll"] ||
                     ""
                 )
-                .trim()
-                .toLowerCase();
+                    .trim()
+                    .toLowerCase();
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // EMAIL
-            // ---------------------------------------------
+            //
+            // Email is NOT displayed in the table,
+            // but is still searchable.
+            // ------------------------------------------------
 
             const email =
                 String(
                     row["Email"] || ""
                 )
-                .trim()
-                .toLowerCase();
+                    .trim()
+                    .toLowerCase();
 
 
-            // ---------------------------------------------
+            // ------------------------------------------------
             // SEARCH
-            // ---------------------------------------------
+            // ------------------------------------------------
 
             const searchMatch =
                 search === "" ||
@@ -505,54 +472,32 @@ function updateCards() {
         filteredData.length;
 
 
-    // ---------------------------------------------
-    // TRACK 1
-    // ---------------------------------------------
-
     const track1 =
         filteredData.filter(row =>
-
             String(
                 row["Track"] || ""
             ).trim() === "Track 1"
-
         ).length;
 
-
-    // ---------------------------------------------
-    // TRACK 2
-    // ---------------------------------------------
 
     const track2 =
         filteredData.filter(row =>
-
             String(
                 row["Track"] || ""
             ).trim() === "Track 2"
-
         ).length;
 
-
-    // ---------------------------------------------
-    // FULLY COMPLETED
-    // ---------------------------------------------
 
     const completed =
         filteredData.filter(row => {
 
-            const overall =
-                getOverallPercentage(
-                    row
-                );
-
-            return overall >= 100;
+            return (
+                getOverallPercentage(row)
+                >= 100
+            );
 
         }).length;
 
-
-    // ---------------------------------------------
-    // AVERAGE
-    // ---------------------------------------------
 
     const average =
         total === 0
@@ -574,7 +519,6 @@ function updateCards() {
                     },
                     0
                 ) / total
-
             );
 
 
@@ -658,19 +602,16 @@ function getOverallPercentage(row) {
 function updateProgress() {
 
     const steps = [
-
         "Step 1",
         "Step 2",
         "Step 3",
         "Step 4",
         "Step 5"
-
     ];
 
 
     steps.forEach(
         (step, index) => {
-
 
             if (
                 filteredData.length === 0
@@ -692,9 +633,9 @@ function updateProgress() {
                         String(
                             row[step] || ""
                         )
-                        .trim()
-                        .toLowerCase()
-                        === "completed"
+                            .trim()
+                            .toLowerCase()
+                            === "completed"
 
                 ).length;
 
@@ -758,6 +699,10 @@ function setProgress(
 
 // ============================================================
 // TABLE
+//
+// IMPORTANT:
+// Email is intentionally NOT displayed.
+// Search still supports Email.
 // ============================================================
 
 function updateTable() {
@@ -785,7 +730,7 @@ function updateTable() {
         tr.innerHTML = `
 
             <td
-                colspan="13"
+                colspan="12"
                 style="
                     text-align:center;
                     padding:30px;
@@ -811,10 +756,6 @@ function updateTable() {
     }
 
 
-    // ========================================================
-    // CREATE EACH ROW
-    // ========================================================
-
     filteredData.forEach(row => {
 
         const tr =
@@ -830,14 +771,6 @@ function updateTable() {
             row["Roll no"] ||
             row["Roll"] ||
             "";
-
-
-        // ----------------------------------------------------
-        // EMAIL
-        // ----------------------------------------------------
-
-        const email =
-            row["Email"] || "";
 
 
         // ----------------------------------------------------
@@ -858,7 +791,6 @@ function updateTable() {
 
         // ----------------------------------------------------
         // BATCH
-        // THIS WAS MISSING IN YOUR PREVIOUS SCRIPT
         // ----------------------------------------------------
 
         const batch =
@@ -867,7 +799,6 @@ function updateTable() {
 
         // ----------------------------------------------------
         // CURRENT TERM
-        // THIS WAS ALSO MISSING
         // ----------------------------------------------------
 
         const currentTerm =
@@ -889,18 +820,13 @@ function updateTable() {
         // ----------------------------------------------------
 
         const overall =
-            getOverallPercentage(
-                row
-            );
+            getOverallPercentage(row);
 
 
         // ====================================================
-        // IMPORTANT:
-        //
-        // The order below MUST exactly match index.html
+        // TABLE ORDER
         //
         // Roll No
-        // Email
         // Program
         // Track
         // Batch
@@ -914,60 +840,40 @@ function updateTable() {
         // Overall
         // ====================================================
 
-
         tr.innerHTML = `
 
             <!-- Roll No -->
 
             <td class="roll-no">
-                ${escapeHTML(
-                    rollNo
-                )}
-            </td>
-
-
-            <!-- Email -->
-
-            <td class="email">
-                ${escapeHTML(
-                    email
-                )}
+                ${escapeHTML(rollNo)}
             </td>
 
 
             <!-- Program -->
 
             <td>
-                ${escapeHTML(
-                    program
-                )}
+                ${escapeHTML(program)}
             </td>
 
 
             <!-- Track -->
 
             <td>
-                ${escapeHTML(
-                    track
-                )}
+                ${escapeHTML(track)}
             </td>
 
 
             <!-- Batch -->
 
             <td>
-                ${escapeHTML(
-                    batch
-                )}
+                ${escapeHTML(batch)}
             </td>
 
 
             <!-- Current Term -->
 
             <td>
-                ${currentTermCell(
-                    currentTerm
-                )}
+                ${currentTermCell(currentTerm)}
             </td>
 
 
@@ -1018,9 +924,7 @@ function updateTable() {
             <!-- Overall -->
 
             <td class="overall">
-                ${escapeHTML(
-                    overall
-                )}%
+                ${escapeHTML(overall)}%
             </td>
 
         `;
@@ -1095,7 +999,7 @@ function currentTermCell(value) {
 
 
 // ============================================================
-// STATUS CELL
+// STEP STATUS CELL
 // ============================================================
 
 function statusCell(value) {
@@ -1159,9 +1063,7 @@ function statusCell(value) {
 // EVALUATION STATUS CELL
 // ============================================================
 
-function evaluationStatusCell(
-    value
-) {
+function evaluationStatusCell(value) {
 
     const status =
         String(
@@ -1172,11 +1074,9 @@ function evaluationStatusCell(
     if (!status) {
 
         return `
-
             <span class="status na">
                 N/A
             </span>
-
         `;
     }
 
@@ -1218,9 +1118,7 @@ function evaluationStatusCell(
         <span
             class="status ${className}"
         >
-            ${escapeHTML(
-                status
-            )}
+            ${escapeHTML(status)}
         </span>
 
     `;
@@ -1229,7 +1127,8 @@ function evaluationStatusCell(
 
 // ============================================================
 // DOWNLOAD
-// MENTOR = DOWNLOAD DISABLED
+//
+// Mentor does NOT have download access.
 // ============================================================
 
 function downloadCSV(
@@ -1248,9 +1147,7 @@ function downloadCSV(
 
 
     const headers =
-        Object.keys(
-            data[0]
-        );
+        Object.keys(data[0]);
 
 
     const rows = [
@@ -1259,7 +1156,6 @@ function downloadCSV(
 
         ...data.map(
             row =>
-
                 headers.map(
                     header =>
                         row[header] ?? ""
@@ -1273,16 +1169,12 @@ function downloadCSV(
         rows
             .map(
                 row =>
-
                     row
                         .map(
                             value =>
-                                csvEscape(
-                                    value
-                                )
+                                csvEscape(value)
                         )
                         .join(",")
-
             )
             .join("\n");
 
@@ -1298,41 +1190,25 @@ function downloadCSV(
 
 
     const url =
-        URL.createObjectURL(
-            blob
-        );
+        URL.createObjectURL(blob);
 
 
     const link =
-        document.createElement(
-            "a"
-        );
+        document.createElement("a");
 
 
-    link.href =
-        url;
+    link.href = url;
+
+    link.download = filename;
 
 
-    link.download =
-        filename;
-
-
-    document.body.appendChild(
-        link
-    );
-
+    document.body.appendChild(link);
 
     link.click();
 
+    document.body.removeChild(link);
 
-    document.body.removeChild(
-        link
-    );
-
-
-    URL.revokeObjectURL(
-        url
-    );
+    URL.revokeObjectURL(url);
 }
 
 
@@ -1371,6 +1247,8 @@ function csvEscape(value) {
 
 // ============================================================
 // DOWNLOAD BUTTON SETUP
+//
+// Mentor = hidden
 // ============================================================
 
 function setupDownloadButtons() {
@@ -1381,115 +1259,17 @@ function setupDownloadButtons() {
         );
 
 
-    // ========================================================
-    // MENTOR
-    // ========================================================
-
     if (
         ROLE === "MENTOR"
     ) {
 
-        if (
-            downloadSection
-        ) {
+        if (downloadSection) {
 
             downloadSection.style.display =
                 "none";
         }
 
         return;
-    }
-
-
-    // ========================================================
-    // TL
-    // ========================================================
-
-    const downloadAll =
-        document.getElementById(
-            "downloadAll"
-        );
-
-
-    const downloadTrack1 =
-        document.getElementById(
-            "downloadTrack1"
-        );
-
-
-    const downloadTrack2 =
-        document.getElementById(
-            "downloadTrack2"
-        );
-
-
-    if (downloadAll) {
-
-        downloadAll.addEventListener(
-            "click",
-            () => {
-
-                downloadCSV(
-                    filteredData,
-                    "Project_Dashboard_All.csv"
-                );
-
-            }
-        );
-    }
-
-
-    if (downloadTrack1) {
-
-        downloadTrack1.addEventListener(
-            "click",
-            () => {
-
-                const data =
-                    filteredData.filter(
-                        row =>
-
-                            String(
-                                row["Track"] || ""
-                            ).trim()
-                            === "Track 1"
-                    );
-
-
-                downloadCSV(
-                    data,
-                    "Project_Dashboard_Track_1.csv"
-                );
-
-            }
-        );
-    }
-
-
-    if (downloadTrack2) {
-
-        downloadTrack2.addEventListener(
-            "click",
-            () => {
-
-                const data =
-                    filteredData.filter(
-                        row =>
-
-                            String(
-                                row["Track"] || ""
-                            ).trim()
-                            === "Track 2"
-                    );
-
-
-                downloadCSV(
-                    data,
-                    "Project_Dashboard_Track_2.csv"
-                );
-
-            }
-        );
     }
 }
 
@@ -1536,10 +1316,6 @@ function setupFilterEvents() {
         );
 
 
-    // ---------------------------------------------
-    // SEARCH
-    // ---------------------------------------------
-
     if (searchInput) {
 
         searchInput.addEventListener(
@@ -1548,10 +1324,6 @@ function setupFilterEvents() {
         );
     }
 
-
-    // ---------------------------------------------
-    // PROGRAM
-    // ---------------------------------------------
 
     if (programFilter) {
 
@@ -1562,10 +1334,6 @@ function setupFilterEvents() {
     }
 
 
-    // ---------------------------------------------
-    // TRACK
-    // ---------------------------------------------
-
     if (trackFilter) {
 
         trackFilter.addEventListener(
@@ -1574,10 +1342,6 @@ function setupFilterEvents() {
         );
     }
 
-
-    // ---------------------------------------------
-    // BATCH
-    // ---------------------------------------------
 
     if (batchFilter) {
 
@@ -1588,10 +1352,6 @@ function setupFilterEvents() {
     }
 
 
-    // ---------------------------------------------
-    // CURRENT TERM
-    // ---------------------------------------------
-
     if (currentTermFilter) {
 
         currentTermFilter.addEventListener(
@@ -1601,10 +1361,6 @@ function setupFilterEvents() {
     }
 
 
-    // ---------------------------------------------
-    // CLEAR
-    // ---------------------------------------------
-
     if (clearBtn) {
 
         clearBtn.addEventListener(
@@ -1612,39 +1368,24 @@ function setupFilterEvents() {
             () => {
 
                 if (searchInput) {
-
-                    searchInput.value =
-                        "";
+                    searchInput.value = "";
                 }
-
 
                 if (programFilter) {
-
-                    programFilter.value =
-                        "All";
+                    programFilter.value = "All";
                 }
-
 
                 if (trackFilter) {
-
-                    trackFilter.value =
-                        "All";
+                    trackFilter.value = "All";
                 }
-
 
                 if (batchFilter) {
-
-                    batchFilter.value =
-                        "All";
+                    batchFilter.value = "All";
                 }
-
 
                 if (currentTermFilter) {
-
-                    currentTermFilter.value =
-                        "All";
+                    currentTermFilter.value = "All";
                 }
-
 
                 applyFilters();
 
@@ -1655,18 +1396,13 @@ function setupFilterEvents() {
 
 
 // ============================================================
-// HELPER FUNCTIONS
+// FORMAT NUMBER
 // ============================================================
 
-function formatNumber(
-    number
-) {
+function formatNumber(number) {
 
-    return Number(
-        number
-    ).toLocaleString(
-        "en-IN"
-    );
+    return Number(number)
+        .toLocaleString("en-IN");
 }
 
 
@@ -1674,33 +1410,31 @@ function formatNumber(
 // ESCAPE HTML
 // ============================================================
 
-function escapeHTML(
-    value
-) {
+function escapeHTML(value) {
 
     return String(
         value ?? ""
     )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 }
 
 
@@ -1708,15 +1442,10 @@ function escapeHTML(
 // SET TEXT
 // ============================================================
 
-function setText(
-    id,
-    value
-) {
+function setText(id, value) {
 
     const element =
-        document.getElementById(
-            id
-        );
+        document.getElementById(id);
 
 
     if (element) {
@@ -1731,9 +1460,7 @@ function setText(
 // LOADING
 // ============================================================
 
-function showLoading(
-    show
-) {
+function showLoading(show) {
 
     const element =
         document.getElementById(
@@ -1755,9 +1482,7 @@ function showLoading(
 // ERROR
 // ============================================================
 
-function showError(
-    message
-) {
+function showError(message) {
 
     const element =
         document.getElementById(
