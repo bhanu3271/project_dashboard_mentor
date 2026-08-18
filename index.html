@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Project Progress Dashboard</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>
+                Project Progress Dashboard
+            </h1>
+
+            <p>
+                Project and Dissertation learner progress
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         KPI CARDS
+    ====================================================== -->
+
+    <section class="cards">
+
+
+        <!-- TOTAL LEARNERS -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Total Learners
+            </div>
+
+            <div
+                id="totalLearners"
+                class="card-value"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <!-- TRACK 1 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Track 1 Learners
+            </div>
+
+            <div
+                id="track1Count"
+                class="card-value"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <!-- TRACK 2 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Track 2 Learners
+            </div>
+
+            <div
+                id="track2Count"
+                class="card-value"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <!-- FULLY COMPLETED -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Fully Completed
+            </div>
+
+            <div
+                id="completedCount"
+                class="card-value"
+            >
+                0
+            </div>
+
+        </div>
+
+
+
+        <!-- AVERAGE -->
+
+        <div class="card">
+
+            <div class="card-title">
+                Average Completion
+            </div>
+
+            <div
+                id="averageCompletion"
+                class="card-value"
+            >
+                0%
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FILTERS
+    ====================================================== -->
+
+    <section class="filters">
+
+
+        <!-- SEARCH -->
+
+        <div class="filter-group">
+
+            <label for="searchInput">
+                Search
+            </label>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Roll No or Email"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- PROGRAM -->
+
+        <div class="filter-group">
+
+            <label for="programFilter">
+                Program
+            </label>
+
+            <select id="programFilter">
+
+                <option value="All">
+                    All Programs
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- TRACK -->
+
+        <div class="filter-group">
+
+            <label for="trackFilter">
+                Track
+            </label>
+
+            <select id="trackFilter">
+
+                <option value="All">
+                    All Tracks
+                </option>
+
+                <option value="Track 1">
+                    Track 1
+                </option>
+
+                <option value="Track 2">
+                    Track 2
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- BATCH -->
+
+        <div class="filter-group">
+
+            <label for="batchFilter">
+                Batch
+            </label>
+
+            <select id="batchFilter">
+
+                <option value="All">
+                    All Batches
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- CURRENT TERM -->
+
+        <div class="filter-group">
+
+            <label for="currentTermFilter">
+                Current Term
+            </label>
+
+            <select id="currentTermFilter">
+
+                <option value="All">
+                    All Current Term
+                </option>
+
+                <option value="True">
+                    True
+                </option>
+
+                <option value="False">
+                    False
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- CLEAR -->
+
+        <button
+            id="clearBtn"
+            class="clear-btn"
+            type="button"
+        >
+            Clear
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROJECT PROGRESS
+    ====================================================== -->
+
+    <section class="progress-section">
+
+
+        <div class="section-header">
+
+            <h2>
+                Project Progress
+            </h2>
+
+        </div>
+
+
+
+        <div class="progress-grid">
+
+
+            <!-- STEP 1 -->
+
+            <div class="progress-item">
+
+                <div class="progress-label">
+
+                    <span>
+                        Step 1
+                    </span>
+
+                    <span id="step1Percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="step1Bar"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 2 -->
+
+            <div class="progress-item">
+
+                <div class="progress-label">
+
+                    <span>
+                        Step 2
+                    </span>
+
+                    <span id="step2Percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="step2Bar"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 3 -->
+
+            <div class="progress-item">
+
+                <div class="progress-label">
+
+                    <span>
+                        Step 3
+                    </span>
+
+                    <span id="step3Percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="step3Bar"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 4 -->
+
+            <div class="progress-item">
+
+                <div class="progress-label">
+
+                    <span>
+                        Step 4
+                    </span>
+
+                    <span id="step4Percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="step4Bar"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 5 -->
+
+            <div class="progress-item">
+
+                <div class="progress-label">
+
+                    <span>
+                        Step 5
+                    </span>
+
+                    <span id="step5Percent">
+                        0%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+
+                    <div
+                        id="step5Bar"
+                        style="width: 0%"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         DOWNLOAD SECTION
+    ====================================================== -->
+
+    <section class="download-section">
+
+
+        <button
+            id="downloadAll"
+            class="download-btn"
+            type="button"
+        >
+            ↓ Download All
+        </button>
+
+
+        <button
+            id="downloadTrack1"
+            class="download-btn"
+            type="button"
+        >
+            ↓ Download Track 1
+        </button>
+
+
+        <button
+            id="downloadTrack2"
+            class="download-btn"
+            type="button"
+        >
+            ↓ Download Track 2
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LEARNER TABLE
+    ====================================================== -->
+
+    <section class="table-section">
+
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>
+                    Learner Details
+                </h2>
+
+                <span id="resultCount">
+                    0 learners
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TABLE WRAPPER -->
+
+        <div class="table-wrapper">
+
+
+            <table id="learnerTable">
+
+
+                <!-- =================================================
+                     TABLE HEADER
+                ================================================== -->
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Roll No
+                        </th>
+
+                        <th>
+                            Email
+                        </th>
+
+                        <th>
+                            Program
+                        </th>
+
+                        <th>
+                            Track
+                        </th>
+
+                        <th>
+                            Batch
+                        </th>
+
+                        <th>
+                            Current Term
+                        </th>
+
+                        <th>
+                            Step 1
+                        </th>
+
+                        <th>
+                            Step 2
+                        </th>
+
+                        <th>
+                            Step 3
+                        </th>
+
+                        <th>
+                            Step 4
+                        </th>
+
+                        <th>
+                            Step 5
+                        </th>
+
+                        <th>
+                            Evaluation Status
+                        </th>
+
+                        <th>
+                            Overall
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- =================================================
+                     TABLE BODY
+
+                     JavaScript will populate this section.
+                ================================================== -->
+
+                <tbody id="tableBody">
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOADING
+    ====================================================== -->
+
+    <div
+        id="loading"
+        class="loading"
+    >
+        Loading dashboard...
+    </div>
+
+
+
+    <!-- =====================================================
+         ERROR
+    ====================================================== -->
+
+    <div
+        id="error"
+        class="error"
+    ></div>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>

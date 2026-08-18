@@ -1,0 +1,359 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.container {
+    width: 95%;
+    max-width: 1600px;
+    margin: auto;
+    padding: 25px 0 50px;
+}
+
+
+/* HEADER */
+
+.header {
+    background: white;
+    border-radius: 14px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header p {
+    margin: 7px 0 0;
+    color: #6b7280;
+}
+
+.refresh-btn {
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.refresh-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* KPI CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.card-title {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+.card-value {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* FILTERS */
+
+.filters {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    display: flex;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.filter-group label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.filter-group input,
+.filter-group select {
+    width: 220px;
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    background: white;
+}
+
+.clear-btn {
+    padding: 10px 18px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+/* PROGRESS */
+
+.progress-section {
+    background: white;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.section-header h2 {
+    margin: 0 0 20px;
+}
+
+.progress-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar div {
+    height: 100%;
+    width: 0%;
+    background: #2563eb;
+    border-radius: 10px;
+}
+
+
+/* DOWNLOAD */
+
+.download-section {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.download-btn {
+    border: none;
+    background: #111827;
+    color: white;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* TABLE */
+
+.table-section {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+
+.table-header {
+    margin-bottom: 15px;
+}
+
+.table-header h2 {
+    margin: 0 0 5px;
+}
+
+#resultCount {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1100px;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+th {
+    background: #111827;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+}
+
+td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 13px;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.na {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+
+/* OVERALL */
+
+.overall {
+    font-weight: bold;
+}
+
+
+/* LOADING */
+
+.loading {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    z-index: 100;
+}
+
+.error {
+    display: none;
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 1000px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .progress-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filters {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group input,
+    .filter-group select {
+        width: 100%;
+    }
+
+    .download-section {
+        flex-direction: column;
+    }
+
+}
